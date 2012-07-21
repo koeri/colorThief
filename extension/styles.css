@@ -1,0 +1,9 @@
+div#showColors{
+	width: 100%;
+}
+
+div.colorItem{
+	/*height: 30px;*/
+	width: 100%;
+	vertical-align: middle;
+}

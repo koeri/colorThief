@@ -1,0 +1,22 @@
+{
+    "name": "Color Thief - 色泥棒",
+    "description": "ページ内で利用されている色情報を簡単にコピーできます。これであなたも色泥棒！",
+    "version": "0.1",
+    "permissions": [
+        "tabs", "http://*/*"
+    ],
+	"background": {
+		"scripts": ["jquery-1.7.2.min.js", "background.js"]
+	},
+    "browser_action": {
+        "default_icon": "icon19.png",
+        "default_title": "Color Thief - 色泥棒",
+		"default_popup": "popup.html"
+    },
+	"content_scripts": [
+    	{
+      		"matches": ["*://*/*"],
+      		"js": ["jquery-1.7.2.min.js", "content.js"]
+    	}
+	]
+}
