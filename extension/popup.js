@@ -6,9 +6,19 @@ $(function(){
 	// 現在表示しているタブ情報を取得
 	chrome.tabs.getSelected(showColors);
 	
-	// 色情報を色んな形式で保存しておくための配列を用意
+	// 表示する色形式を設定
+	var colorType = "HEX";
+	
+	// 色情報をRGB/HEX形式で保存しておくための配列
 	var cRGB = [];
 	var cHEX = [];
+	
+	// RGBを個別に保存しておくための配列
+	// RGB値によって表示するテキスト色を白/黒に判別するための計算用
+	var cR = [];
+	var cG = [];
+	var cB = [];
+	var txtColor = [];
 
 	// popup.html に表示するものを記述
 	function showColors(tab){
@@ -21,20 +31,31 @@ $(function(){
 		
 			console.log("bg.getColors[tab.id] =" + bg.getColors[tab.id]);
 			
+			$("#showColors").empty();
+			
 			for(var i = 0; i < bg.getColors[tab.id].length; i++){
 			
-				// RGB形式,HEX形式へそれぞれ変換
+				// RGB/HEX形式へそれぞれ変換
 				// rgbcolor.js を利用
 				var c = new RGBColor(bg.getColors[tab.id][i]);
 				cRGB[i] = c.toRGB();
 				cHEX[i] = c.toHex();
 				
-				var colorType = "HEX";
+				// RGB値も取得
+				cR[i] = c.r;
+				cG[i] = c.g;
+				cB[i] = c.b;
+				
+				// 色情報を表示するテキスト色を、色の輝度によって白/黒に振り分け
+				txtColor[i] = checkTxtColor(cR[i], cR[i], cB[i]);
+				
+				// 表示する色形式を設定
+				colorType = "RGB";
 				
 				// 指定した形式で色情報を表示
 				switch(colorType){
 					case "RGB":
-						$('<div class="colorItem" style="background-color:' + cRGB[i] + '">' + cRGB[i] + '</div>').appendTo("#showColors");
+						$('<div class="colorItem" style="color:' + txtColor[i] + '; background-color:' + cRGB[i] + ';">' + cRGB[i] + '</div>').appendTo("#showColors");
 						break;
 					case "HEX":
 						$('<div class="colorItem" style="background-color:' + cHEX[i] + '">' + cHEX[i] + '</div>').appendTo("#showColors");
@@ -48,3 +69,17 @@ $(function(){
 		}
 	}
 });
+
+// 色によってテキスト色を白/黒どちらにするか判別する
+// 参考式: Y=0.3R+0.6G+0.1B で Y>127なら黒、それ以外なら白
+// 参考URL: http://q.hatena.ne.jp/1214314649
+var checkTxtColor = function(cR,cG,cB){
+
+	// 最高値は255なので、約半分の数値127を堺目にして白/黒の判別する
+	var cY = 0.3*cR + 0.6*cG + 0.1*cB;
+	
+	if(cY > 127){
+		return "#111111"; // 黒に設定
+	}
+	return "#EEEEEE"; // 白に設定
+}
