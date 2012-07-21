@@ -1,9 +1,17 @@
+body{
+	min-width: 250px;
+	background: #EEE;
+}
+
 div#showColors{
-	width: 100%;
+	width: 250px;
+	border-radius: 10px;
+	overflow: hidden;
 }
 
 div.colorItem{
-	/*height: 30px;*/
-	width: 100%;
+	font-family: 'Karla', sans-serif;
+	width: 230px;
 	vertical-align: middle;
+	padding: 8px 10px 8px 10px;
 }
