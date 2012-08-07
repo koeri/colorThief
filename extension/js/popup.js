@@ -31,8 +31,10 @@ $(function(){
 		
 			console.log("bg.getColors[tab.id] =" + bg.getColors[tab.id]);
 			
+			// タブを開くごとに色情報を更新するため、古い情報を最初に消去してリセットしておく
 			$("#showColors").empty();
 			
+			// 色情報を読込み＆表示
 			for(var i = 0; i < bg.getColors[tab.id].length; i++){
 			
 				// RGB/HEX形式へそれぞれ変換
@@ -41,30 +43,34 @@ $(function(){
 				cRGB[i] = c.toRGB();
 				cHEX[i] = c.toHex();
 				
-				// RGB値も取得
+				// RGB値も個別に取得
 				cR[i] = c.r;
 				cG[i] = c.g;
 				cB[i] = c.b;
 				
-				// 色情報を表示するテキスト色を、色の輝度によって白/黒に振り分け
+				// 色情報を表示するテキスト色を、色情報の輝度によって白/黒に振り分け
 				txtColor[i] = checkTxtColor(cR[i], cR[i], cB[i]);
 				
 				// 表示する色形式を設定
+				// そのうちボタン押したりして切替できるようにしたい
 				colorType = "RGB";
 				
 				// 指定した形式で色情報を表示
 				switch(colorType){
+					//RGB形式の場合
 					case "RGB":
 						$('<div class="colorItem" style="color:' + txtColor[i] + '; background-color:' + cRGB[i] + ';">' + cRGB[i] + '</div>').appendTo("#showColors");
 						break;
+					// Hex形式の場合
 					case "HEX":
 						$('<div class="colorItem" style="background-color:' + cHEX[i] + '">' + cHEX[i] + '</div>').appendTo("#showColors");
 						break;
 				}
-			
 			}
+			
 		//色情報が取得できていなかったら
 		}else{
+			// メッセージを表示
 			$("#showColors").html('泥棒できる色がありません。</br>残念！');
 		}
 	}
