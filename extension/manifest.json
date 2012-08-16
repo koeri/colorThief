@@ -1,6 +1,6 @@
 {
-    "name": "Color Thief - 色泥棒",
-    "description": "ページ内で利用されている色情報を簡単にコピーできます。これであなたも色泥棒！",
+    "name": "Color Thief - 色どろぼう",
+    "description": "ページ内で利用されている色情報を簡単にコピーできます。これであなたも色どろぼう！",
     "version": "0.1",
     "permissions": [
         "tabs", "http://*/*"
@@ -10,7 +10,7 @@
 	},
     "browser_action": {
         "default_icon": "img/icon19.png",
-        "default_title": "Color Thief - 色泥棒",
+        "default_title": "Color Thief - 色どろぼう",
 		"default_popup": "popup.html"
     },
 	"content_scripts": [

@@ -14,4 +14,5 @@ div.colorItem{
 	width: 230px;
 	vertical-align: middle;
 	padding: 8px 10px 8px 10px;
+	cursor: pointer;
 }

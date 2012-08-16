@@ -52,41 +52,60 @@ $(function(){
 				// 色情報を表示するテキスト色を、色情報の輝度によって白/黒に振り分け
 				txtColor[i] = checkTxtColor(cR[i], cR[i], cB[i]);
 				
-				// 表示する色形式を設定
-				// そのうちボタン押したりして切替できるようにしたい
+				// 表示する色形式(RGB/HEX)を設定
+				// [TBD] ボタン押したりして切替できるようにしたい
 				colorType = "RGB";
 				
 				// 指定した形式で色情報を表示
 				switch(colorType){
 					//RGB形式の場合
 					case "RGB":
-						$('<div class="colorItem" style="color:' + txtColor[i] + '; background-color:' + cRGB[i] + ';">' + cRGB[i] + '</div>').appendTo("#showColors");
+						$('<div class="colorItem" style="background-color:' + cRGB[i] + ';"><span class="colorTxt" style="color:' + txtColor[i] + ';">' + cRGB[i] + '</span></div>').appendTo("#showColors");
 						break;
 					// Hex形式の場合
 					case "HEX":
-						$('<div class="colorItem" style="background-color:' + cHEX[i] + '">' + cHEX[i] + '</div>').appendTo("#showColors");
+						$('<div class="colorItem" style="background-color:' + cHEX[i] + ';"><span class="colorTxt" style="color:' + txtColor[i] + ';">' + cHEX[i] + '</span></div>').appendTo("#showColors");
 						break;
 				}
+				
+				// 色情報をクリックしたらクリップボードにコピーする
+				copyColor();
+			
 			}
 			
 		//色情報が取得できていなかったら
 		}else{
 			// メッセージを表示
-			$("#showColors").html('泥棒できる色がありません。</br>残念！');
+			$("#showColors").html('色どろぼう失敗！</br>ブラウザを再読込してから再度アイコンをクリックしてください。');
 		}
 	}
 	
-	$(".colorItem").hover(
-		function () {
-			$(this).append($("<span> ***</span>"));
-		},
-		function () {
-			$(this).find("span:last").remove();
-		}
-	);
-	
 	
 });
+
+
+// 色情報をクリックしたらアニメーション＆クリップボードにコピー
+var copyColor = function(){
+	$(".colorItem").click(
+		function () {
+			// テキストをクリップボードにコピー
+			var cTxt = $(this).find("span").text();
+			copyTextToClipboard(cTxt);
+			// コピーしたテキストをアニメーションする
+			$(this).find("span").hide("slow");
+		}
+	);
+}
+
+// テキストをクリップボードにコピー
+var copyTextToClipboard = function(txt){
+	var copyArea = $("<textarea/>");
+	copyArea.text(txt);
+	$("body").append(copyArea);
+	copyArea.select();
+	document.execCommand("copy");
+	copyArea.remove();
+}
 
 // 色によってテキスト色を白/黒どちらにするか判別する
 // 参考式: Y=0.3R+0.6G+0.1B で Y>127なら黒、それ以外なら白
