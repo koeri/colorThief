@@ -16,7 +16,6 @@ body{
 }
 
 .colorItem{
-	font-family: 'Karla', sans-serif;
 	width: 230px;
 	height: 20px;
 	vertical-align: middle;
@@ -25,10 +24,12 @@ body{
 }
 
 .colorTxt{
+	font-family: 'Karla', sans-serif;
 	float: left;
 }
 
 .copied{
+	font-family: 'Cantora One', sans-serif;
 	float: right;
 	display: none;
 	opacity: 0;
