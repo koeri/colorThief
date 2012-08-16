@@ -8,7 +8,7 @@ $(function(){
 	chrome.tabs.getSelected(showColors);
 	
 	// 表示する色形式を設定
-	var colorType = "HEX";
+	var colorType = "RGB";
 	
 	// 色情報をRGB/HEX形式で保存しておくための配列
 	var cRGB = [];
@@ -31,6 +31,9 @@ $(function(){
 		if(bg.getColors[tab.id] != null){
 		
 			console.log("bg.getColors[tab.id] =" + bg.getColors[tab.id]);
+			
+			// header部分を表示
+			$("#header").css({display:"block"});
 			
 			// タブを開くごとに色情報を更新するため、古い情報を最初に消去してリセットしておく
 			$("#showColors").empty();
@@ -60,11 +63,12 @@ $(function(){
 				switch(colorType){
 					//RGB形式の場合
 					case "RGB":
-						$('<div class="colorItem" style="background-color:' + cRGB[i] + ';"><span class="colorTxt" style="color:' + txtColor[i] + ';">' + cRGB[i] + '</span></div>').appendTo("#showColors");
+					$('<div class="colorItem" style="color:' + txtColor[i] + '; background-color:' + cRGB[i] + ';"><div class="colorTxt">' + cRGB[i] + '</div><div class="copied">Copied!</div></div>').appendTo("#showColors");
 						break;
 					// Hex形式の場合
 					case "HEX":
-						$('<div class="colorItem" style="background-color:' + cHEX[i] + ';"><span class="colorTxt" style="color:' + txtColor[i] + ';">' + cHEX[i] + '</span></div>').appendTo("#showColors");
+						/*$('<div class="colorItem" style="background-color:' + cHEX[i] + ';"><span class="colorTxt" style="color:' + txtColor[i] + ';">' + cHEX[i] + '</span></div>').appendTo("#showColors");*/
+						$('<div class="colorItem" style="color:' + txtColor[i] + '; background-color:' + cHEX[i] + ';"><div class="colorTxt">' + cHEX[i] + '</div><div class="copied">Copied!</div></div>').appendTo("#showColors");
 						break;
 				}
 				
@@ -83,21 +87,29 @@ $(function(){
 	
 });
 
+// [TBD] ボタンクリックで呼び出される
+var setColorType = function(clickColorType) {
+	console.log(colorType);
+}
 
-// 色情報をクリックしたらアニメーション＆クリップボードにコピー
+// 色情報をクリックしたらクリップボードにコピー＆アニメーション
 var copyColor = function(){
 	$(".colorItem").click(
 		function () {
-			// テキストをクリップボードにコピー
-			var cTxt = $(this).find("span").text();
+			// 色情報テキストをクリップボードにコピー
+			var cTxt = $(this).find(".colorTxt").text();
 			copyTextToClipboard(cTxt);
-			// コピーしたテキストをアニメーションする
-			$(this).find("span").hide("slow");
+			// コピーした色情報テキストの右横に"Copied!"をアニメーション表示する
+			$(this).find(".copied").css({display: "block", opacity: "0"});
+			$(this).find(".copied").fadeTo("slow", 1).fadeTo("slow", 0, function(){$(".copied").css({display: "none"});});
 		}
 	);
 }
 
 // テキストをクリップボードにコピー
+// クリップボードへのコピーはテキストフォームでしかできないので
+// テキストエリアをフェイクで作ってそこにテキストを格納してコピー
+// 参考URL: http://stackoverflow.com/questions/3436102/copy-to-clipboard-in-chrome-extension
 var copyTextToClipboard = function(txt){
 	var copyArea = $("<textarea/>");
 	copyArea.text(txt);

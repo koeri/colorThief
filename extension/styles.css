@@ -3,16 +3,33 @@ body{
 	background: #EEE;
 }
 
-div#showColors{
+#header{
+	display: none;
+	width: 250px;
+	height: 30px;
+}
+
+#showColors{
 	width: 250px;
 	border-radius: 10px;
 	overflow: hidden;
 }
 
-div.colorItem{
+.colorItem{
 	font-family: 'Karla', sans-serif;
 	width: 230px;
+	height: 20px;
 	vertical-align: middle;
 	padding: 8px 10px 8px 10px;
 	cursor: pointer;
+}
+
+.colorTxt{
+	float: left;
+}
+
+.copied{
+	float: right;
+	display: none;
+	opacity: 0;
 }
