@@ -4,6 +4,7 @@ $(function(){
 	console.log("bg.getColors =" + bg.getColors);
 	
 	// 現在表示しているタブ情報を取得
+	// 必ず引数に関数をとる
 	chrome.tabs.getSelected(showColors);
 	
 	// 表示する色形式を設定
@@ -74,6 +75,17 @@ $(function(){
 			$("#showColors").html('泥棒できる色がありません。</br>残念！');
 		}
 	}
+	
+	$(".colorItem").hover(
+		function () {
+			$(this).append($("<span> ***</span>"));
+		},
+		function () {
+			$(this).find("span:last").remove();
+		}
+	);
+	
+	
 });
 
 // 色によってテキスト色を白/黒どちらにするか判別する
