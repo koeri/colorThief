@@ -35,16 +35,22 @@ body{
 	opacity: 0;
 }
 
-#errorArea{
+#failedArea{
+	padding: 4px 12px 4px 12px;
+
+}
+
+#failedTitle{
+	font-family: 'mplus-1p-medium', 'Cantora One', sans-serif;
+	font-size: 18px;
+}
+
+#failedTxtEng{
 	font-family: 'Karla', sans-serif;
-	font-size: 20px;
+	font-size: 14px;
 }
 
-#errorTitle{
-}
-
-#errorEng{
-}
-
-#errorJpn{
+#failedTxtJpn{
+	font-family: mplus-1p-medium;
+	font-size: 12px;
 }
