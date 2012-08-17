@@ -6,7 +6,6 @@ $(function() {
 	var cssSelecters = [
 		'backgroundColor',
 		'color',
-		//'borderColor',
 		'borderTopColor',
 		'borderRightColor',
 		'borderBottomColor',
@@ -50,7 +49,7 @@ $(function() {
 });
 
 /** 
- * 指定した文字列が含まれていたら、別の文字列で置換+アルファの処理を実行する。
+ * 指定した文字列が含まれていたら、別の文字列で置換+アルファの処理を実行
  * @param {String} checkStr 検索したい文字列
  * @param {String} keywordStr 検索文字列 
  * @param {String} replaceStr 置換したい文字列
@@ -70,8 +69,12 @@ var replaceTxt = function(checkStr, keywordStr, replaceStr){
 	}
 }
 
-// 色情報を溜め込んでいる配列内に 同じ色情報が存在するかを確認
-// 同じ色情報が存在したら true, 存在しなかったら false を返す。
+/** 
+ * 色情報が入った配列内に、指定した文字列(色情報)と同じ要素があるかを検索
+ * @param {Array} array 調査対象の配列
+ * @param {String} str 検索文字列
+ * @returns {Boolean} 同じ情報が存在したら true, 存在しなかったら false を返す
+*/
 var checkDuplicate = function(array, str){
 	for(var i =0; i < array.length; i++){
 		if(str == array[i]){

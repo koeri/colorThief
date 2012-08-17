@@ -78,7 +78,7 @@ var showColors = function(tab){
 	//色情報が取得できていなかったら
 	}else{
 		// メッセージを表示
-		$("#showColors").html('色どろぼう失敗！</br>ブラウザを再読込してから再度アイコンをクリックしてください。');
+		$("#showColors").html('<div id="errorArea"><h2 id="errorTitle">Error! - 色泥棒失敗！</h2><p id="errorEng">Please click the icon again, after reload this page.</p><p id="errorJpn">ブラウザを再読込してから、再度アイコンをクリックしてください。</p></div>');
 	}
 }
 
