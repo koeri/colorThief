@@ -1,3 +1,10 @@
+/////////////////////////////////
+// # TODO
+// - RGB/HEXの設定値を保存できるようにしたい。
+// - 色情報一覧を画像を保存できるようにしたい。
+// - 色情報一覧をリストで書き出せるようにしたい。
+/////////////////////////////////
+
 $(function(){
 
 	// 現在表示しているタブ情報を取得
@@ -69,11 +76,10 @@ var showColors = function(tab){
 					$('<div class="colorItem" style="color:' + txtColor[i] + '; background-color:' + cHEX[i] + ';"><div class="colorTxt">' + cHEX[i] + '</div><div class="copied">Copied!</div></div>').appendTo("#showColors");
 					break;
 			}
-			
-			// 色情報をクリックしたらクリップボードにコピーする
-			copyColor();
-			
 		}
+		
+		// 色情報をクリックしたらクリップボードにコピーする
+		copyColor();
 			
 	//色情報が取得できていなかったら
 	}else{
@@ -104,7 +110,14 @@ var copyColor = function(){
 			copyTextToClipboard(cTxt);
 			// コピーした色情報テキストの右横に"Copied!"をアニメーション表示する
 			$(this).find(".copied").css({display: "block", opacity: "0"});
-			$(this).find(".copied").fadeTo("slow", 1).fadeTo("slow", 0, function(){$(".copied").css({display: "none"});});
+			//$(this).find(".copied").fadeTo("slow", 1).fadeTo("slow", 0, function(){$(".copied").css({display: "none"});});
+			$(this)
+				.find(".copied")
+				.fadeTo("slow", 1, function(){
+					$(this).fadeTo("slow", 0, function(){
+						$(this).css({display: "none"});
+					})
+				});
 		}
 	);
 }
