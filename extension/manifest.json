@@ -1,15 +1,16 @@
 {
     "name": "Color Thief - 色泥棒",
-    "description": "ページ内で利用されている色情報を簡単にコピーできます。これであなたも色泥棒！",
+    "description": "ページ内で利用されている色情報を簡単に一覧＆コピーできます。これであなたも色泥棒",
     "version": "0.1",
+	"manifest_version": 2,
 	"icons":{
 		"16":"img/icon_16.png",
 		"48":"img/icon_48.png",
 		"128":"img/icon_128.png"
 	},
-    "permissions": [
-        "tabs", "http://*/*"
-    ],
+	"permissions": [
+		"tabs", "http://*/*"
+	],
 	"background": {
 		"scripts": ["lib/jquery-1.7.2.min.js", "js/background.js"]
 	},

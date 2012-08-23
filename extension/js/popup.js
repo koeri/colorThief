@@ -11,13 +11,27 @@ $(function(){
 	// 現在表示しているタブ情報を取得
 	// 必ず引数に関数をとる
 	chrome.tabs.getSelected(showColors);
+	
+	// ボタンが押されたら表示する色種別(RGB/HEX)を設定
+	$("#setRGB").click(
+		function (){
+			setColorType("RGB");
+		}
+	);
+	$("#setHEX").click(
+		function (){
+			setColorType("HEX");
+		}
+	);
+
 
 });
 
 /////////////////////////////////
-// 初期化
+// 変数の準備
 /////////////////////////////////
 // background.js を読み込む
+//var bg = chrome.extension.getBackgroundPage();
 var bg = chrome.extension.getBackgroundPage();
 	
 // 色情報をRGB/HEX形式で保存しておくための配列
@@ -29,6 +43,9 @@ var cR = [];
 var cG = [];
 var cB = [];
 var txtColor = [];
+
+// 色種類の表示種類を設定するための変数
+var colorType = "RGB"; 
 
 /////////////////////////////////
 // popup.html に表示するものを記述
@@ -92,10 +109,9 @@ var showColors = function(tab){
 /////////////////////////////////
 // 表示する色形式(RGB/HEX)をボタンで設定
 /////////////////////////////////
-var colorType = "RGB"; // 初期設定
 var setColorType = function(clickColorType) {
-	console.log(clickColorType);
-	console.log(colorType);
+	console.log("clickColorType = " + clickColorType);
+	//console.log(colorType);
 	colorType = clickColorType;
 	chrome.tabs.getSelected(showColors);
 }
