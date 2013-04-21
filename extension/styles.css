@@ -1,12 +1,14 @@
 body{
 	min-width: 250px;
 	background: #EEE;
+	margin: 10px;
 }
 
 #header{
 	display: none;
 	width: 250px;
 	height: 30px;
+	margin-bottom: 6px;
 }
 
 #showColors{

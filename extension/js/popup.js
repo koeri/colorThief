@@ -1,9 +1,11 @@
 /////////////////////////////////
 // # TODO
-// - RGB/HEXどちらを初期状態にするか保存できるようにしたい。（Chrome間で同期したい）
+// - RGB/HEXどちらを初期状態にするか保存できるようにしたい。（2013.4.22 済）
+// - RGB/HEXどちらを初期状態にするか保存したものを、Chrome間で同期するようにしたい。
 // - 色情報をソートできるようにしたい。
 // - 色情報一覧を画像を保存できるようにしたい。
 // - 色情報一覧をリストで書き出せるようにしたい。
+// - コピーした色情報をストックしておけるようにしたい。
 /////////////////////////////////
 
 $(function(){
@@ -15,12 +17,12 @@ $(function(){
 	// ボタンが押されたら表示する色種別(RGB/HEX)を設定
 	$("#setRGB").click(
 		function (){
-			setColorType("RGB");
+			setColorType("RGB"); // RGBにセット
 		}
 	);
 	$("#setHEX").click(
 		function (){
-			setColorType("HEX");
+			setColorType("HEX"); // HEXにセット
 		}
 	);
 
@@ -45,7 +47,8 @@ var cB = [];
 var txtColor = [];
 
 // 色種類の表示種類を設定するための変数
-var colorType = "RGB"; 
+var colorType = ""; // 初期値は空
+
 
 /////////////////////////////////
 // popup.html に表示するものを記述
@@ -83,7 +86,10 @@ var showColors = function(tab){
 			// 色情報を表示するテキスト色を、色情報の輝度によって白/黒に振り分け
 			txtColor[i] = checkTxtColor(cR[i], cR[i], cB[i]);
 			
-			// 指定した形式で色情報を表示
+			// ローカルストレージに格納されている色表示形式を確認
+			checkColorTypeinLocalStorage();
+
+			// 指定された形式で色情報を表示
 			switch(colorType){
 				//RGB形式の場合
 				case "RGB":
@@ -106,13 +112,56 @@ var showColors = function(tab){
 	}
 }
 
+
+/////////////////////////////////
+// ローカルストレージに格納されている色表示形式を確認
+/////////////////////////////////
+var checkColorTypeinLocalStorage = function(){
+
+	// ボタンにフォーカスが当たってる場合はフォーカスを外す
+	$("#setRGB").blur();
+	$("#setHEX").blur();
+
+	// もしローカルストレージに何も値が記録されていなかったら
+	if (localStorage.colorType == null){
+		// RGB を初期値としてセット
+		localStorage.colorType = "RGB";
+		// ローカルストレージに記録
+		colorType = localStorage.colorType;
+		// ボタン色を変更
+		$("#setRGB").addClass("btn-primary");
+
+
+	// 何か値が記録されていたら
+	}else{
+		// ローカルストレージから値を取り出して、変数 colorType に代入
+		colorType = localStorage.colorType;
+		
+		if(colorType == "RGB"){
+			// ボタン色を変更
+			$("#setHEX").removeClass("btn-primary");
+			$("#setRGB").addClass("btn-primary");
+		}else if(colorType == "HEX"){
+			// ボタン色を変更
+			$("#setRGB").removeClass("btn-primary");
+			$("#setHEX").addClass("btn-primary");
+
+		}
+	}
+}
+
 /////////////////////////////////
 // 表示する色形式(RGB/HEX)をボタンで設定
 /////////////////////////////////
 var setColorType = function(clickColorType) {
 	console.log("clickColorType = " + clickColorType);
 	//console.log(colorType);
-	colorType = clickColorType;
+
+	// 変数 colorType に文字列 RGB または HEX を格納
+	colorType = clickColorType; 
+	// ローカルストレージに記録
+	localStorage.colorType = colorType; 
+
 	chrome.tabs.getSelected(showColors);
 }
 

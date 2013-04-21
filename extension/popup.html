@@ -2,18 +2,25 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<link rel=stylesheet type="text/css" href="styles.css">
+<!-- Web Fonts -->
 <link href='http://fonts.googleapis.com/css?family=Karla' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Cantora+One' rel='stylesheet' type='text/css'>
 <link href="http://mplus-fonts.sourceforge.jp/webfonts/mplus_webfonts.css" rel="stylesheet" type="text/css">
+<!-- jQuery -->
 <script src="lib/jquery-1.7.2.min.js"></script>
+<!-- Bootstrap -->
+<script src="lib/bootstrap.min.js"></script>
+<link rel=stylesheet type="text/css" href="lib/bootstrap.min.css">
+<!-- other liblary -->
 <script src="lib/rgbcolor.js"></script>
+<!-- chrome extension files -->
 <script src="js/popup.js"></script>
+<link rel=stylesheet type="text/css" href="styles.css">
 </head>
 <body>
 	<div id="header">
-		<button id="setRGB" class="btnOn" type="button">RGB</button>
-		<button id="setHEX" class="btnOff" type="button">Hex</button>
+		<button id="setRGB" class="btn btn-small" type="button">RGB</button>
+		<button id="setHEX" class="btn btn-small" type="button">Hex</button>
 	</div>
 	<div id="showColors">
 	</div>
