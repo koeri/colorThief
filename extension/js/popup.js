@@ -26,7 +26,6 @@ $(function(){
 		}
 	);
 
-
 });
 
 /////////////////////////////////
@@ -56,7 +55,7 @@ var colorType = ""; // 初期値は空
 var showColors = function(tab){
 	
 	// console.log(tab);
-	
+
 	// if文で色情報が取得できているかどうか判別
 	// 色情報が取得できていたら
 	if(bg.getColors[tab.id] != null){
@@ -64,6 +63,10 @@ var showColors = function(tab){
 		
 		// header部分を表示
 		$("#header").css({display:"block"});
+
+		// ボタンにアウトラインが付いてしまうのを外す
+		// デフォルトでアウトラインが付くのは Chrome の仕様のようだ 
+		$("#setRGB").css("outline","none");
 		
 		// タブを開くごとに色情報を更新するため、古い情報を最初に消去してリセットしておく
 		$("#showColors").empty();
@@ -110,6 +113,7 @@ var showColors = function(tab){
 		// メッセージを表示
 		$("#showColors").html('<div id="failedArea"><h3 id="failedTitle">Failed! - 色泥棒失敗！</h3><p id="failedTxtEng">Please click the icon again, after reload this page.</p><p id="failedTxtJpn">ブラウザを再読込してから、再度アイコンをクリックしてください。</p></div>');
 	}
+
 }
 
 
@@ -117,10 +121,6 @@ var showColors = function(tab){
 // ローカルストレージに格納されている色表示形式を確認
 /////////////////////////////////
 var checkColorTypeinLocalStorage = function(){
-
-	// ボタンにフォーカスが当たってる場合はフォーカスを外す
-	$("#setRGB").blur();
-	$("#setHEX").blur();
 
 	// もしローカルストレージに何も値が記録されていなかったら
 	if (localStorage.colorType == null){
