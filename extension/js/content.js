@@ -33,8 +33,9 @@ $(function() {
 			}
 		}
 	);
-		
-	console.log(colors);
+	
+	// デバッグ用	
+	//console.log(colors);
 	
 	// background.js に配列colorsのデータを送信
 	// content.js は現在いるタブに対しての操作はできるが、拡張機能にたいしての操作はできない。

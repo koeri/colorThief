@@ -1,7 +1,7 @@
 {
     "name": "Color Thief - 色泥棒",
     "description": "サイトで使われている色をワンクリックで一覧＆コピーできます。憧れサイトのカラースキームをおちゃめに泥棒しちゃいましょう！",
-    "version": "0.1.5",
+    "version": "0.1.6",
 	"manifest_version": 2,
 	"icons":{
 		"16":"img/icon_16.png",
